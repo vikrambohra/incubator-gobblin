@@ -21,14 +21,16 @@ MOCK_COUCHBASE_VERSION=1.5.18
 mkdir -p mock-couchbase
 if [ -d mock-couchbase/.git ];
   then
+    echo "dir exists.."
     git -C mock-couchbase pull
     git -C mock-couchbase checkout tags/${MOCK_COUCHBASE_VERSION}
   else
+    echo "dir not exists.."
     git clone https://github.com/couchbase/CouchbaseMock.git mock-couchbase
     git -C mock-couchbase checkout tags/${MOCK_COUCHBASE_VERSION}
   fi
 pushd mock-couchbase
-if ! mvn package -Dmaven.test.skip=true; then
+if ! mvn package -X -Dmaven.test.skip=true; then
   echo "Error building mock-couchbase"
   exit 1
 fi

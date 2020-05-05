@@ -16,6 +16,7 @@
  */
 
 subprojects {
+//  apply plugin: 'com.jfrog.bintray'
   project.version = rootProject.version
   project.group = rootProject.group
 }

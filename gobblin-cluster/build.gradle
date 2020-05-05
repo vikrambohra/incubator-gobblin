@@ -69,8 +69,30 @@ configurations {
   tests
 }
 
+//artifacts {
+//  tests testJar
+//}
 artifacts {
-  tests testJar
+  archives testJar
+}
+
+configure(install.repositories.mavenInstaller) {
+  addFilter(testJar.baseName) { artifact, file ->
+    artifact.name == testJar.baseName
+  }.project(rootProject.pomAttributes).artifactId = testJar.baseName
+  addFilter('') { artifact, file ->
+    artifact.name == jar.baseName
+  }
+}
+
+
+configure(uploadArchives.repositories.mavenDeployer) {
+  addFilter(testJar.baseName) { artifact, file ->
+    artifact.name == testJar.baseName
+  }.project(rootProject.pomAttributes).artifactId = testJar.baseName
+  addFilter('') { artifact, file ->
+    artifact.name == jar.baseName
+  }
 }
 
 configurations {

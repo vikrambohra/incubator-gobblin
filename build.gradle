@@ -17,7 +17,6 @@
 
 
 apply from: 'gradle/scripts/environment.gradle'
-
 buildscript {
   apply from: 'gradle/scripts/repositories.gradle'
   apply from: 'gradle/scripts/defaultBuildProperties.gradle'
@@ -42,8 +41,12 @@ buildscript {
   }
   dependencies {
     classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0"
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
   }
 }
+
+
+apply plugin: 'com.jfrog.bintray'
 
 apply plugin: "com.github.hierynomus.license"
 
@@ -136,6 +139,11 @@ apply from: 'gradle/scripts/javaVersionCheck.gradle'
 apply from: 'gradle/scripts/rat.gradle'
 apply from: 'gradle/scripts/release.gradle'
 
+//plugins {
+//  id 'maven-publish'
+//}
+
+
 task wrapper(type: Wrapper) { gradleVersion = '2.13' }
 
 /*
@@ -148,6 +156,61 @@ allprojects {
     doFirst {
       it.codegenClasspath += files("${System.getProperty('java.home')}/../lib/tools.jar")
     }
+  }
+}
+
+
+//apply plugin: 'java-library'
+//apply plugin: 'maven-publish'
+//subprojects {
+//  publishing {
+//    publications {
+//      maven(MavenPublication) {
+//        from components.java
+//        artifact sourcesJar
+//        artifact javadocJar
+//      }
+//    }
+//  }
+//}
+//
+//subprojects {
+//  bintray {
+//    user = 'vikrambohra'
+//    key = '2d3ed691fa4cb37223e1254103b26755da937549'
+//    publish = true
+//    configurations = ['archives']
+//    pkg {
+//      repo = 'test-repo'
+//      name = 'gobblin-github'
+//      userOrg = 'linkedin'
+//      licenses = ['Apache-2.0']
+//      vcsUrl = 'https://github.com/apache/incubator-gobblin.git'
+//      version {
+//        name = project.version
+//        desc = 'Gobblin test publish'
+//        released  = new Date()
+//      }
+//    }
+//  }
+//}
+
+
+
+subprojects {
+  plugins.withType(JavaPlugin) {
+    plugins.apply('maven')
+    // Publishing of maven artifacts for subproject
+      uploadArchives {
+        repositories {
+          mavenDeployer {
+            repository(url: "https://api.bintray.com/maven/linkedin/test-repo/gobblin-github/;publish=1") {
+              authentication(userName: 'vikrambohra', password: '2d3ed691fa4cb37223e1254103b26755da937549')
+            }
+            //pom.project pomAttributes
+          }
+        }
+      }
   }
 }
 

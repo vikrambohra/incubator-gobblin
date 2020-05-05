@@ -92,3 +92,4 @@ signing {
 }
 
 assemble.dependsOn buildDistributionTar
+uploadArchives.enabled = false

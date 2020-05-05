@@ -96,8 +96,9 @@ artifacts {
 }
 
 test {
-  workingDir rootProject.rootDir
-  maxParallelForks = 1
+  exclude '**/*'
+//  workingDir rootProject.rootDir
+//  maxParallelForks = 1
 }
 
 clean {

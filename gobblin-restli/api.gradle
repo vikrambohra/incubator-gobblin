@@ -108,6 +108,18 @@ install {
     }
   }
 }
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      addFilter('data-template') { artifact, file -> artifact.name.contains("data-template")
+      }.project(rootProject.pomAttributes)
+      addFilter('rest-client') { artifact, file -> artifact.name.contains("rest-client")
+      }.project(rootProject.pomAttributes)
+      addFilter('') { artifact, file -> artifact.name == project.name
+      }.project(rootProject.pomAttributes)
+    }
+  }
+}
 
 if (rootProject.ext.publishToMaven || rootProject.ext.publishToNexus) {
   uploadArchives {

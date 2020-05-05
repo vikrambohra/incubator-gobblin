@@ -48,6 +48,21 @@ if (rootProject.ext.publishToMaven || rootProject.ext.publishToNexus) {
   }
 }
 
+configure(uploadArchives.repositories.mavenDeployer) {
+  addFilter('gobblin-rest-api-rest-client') {artifact, file ->
+    artifact.name == 'gobblin-rest-api-rest-client'
+  }.project(rootProject.pomAttributes).artifactId = 'gobblin-rest-api-rest-client'
+
+  addFilter('gobblin-rest-api-data-template') {artifact, file ->
+    artifact.name == 'gobblin-rest-api-data-template'
+  }.project(rootProject.pomAttributes).artifactId = 'gobblin-rest-api-data-template'
+
+  addFilter('gobblin-rest-api') {artifact, file ->
+    artifact.name == 'gobblin-rest-api'
+  }.project(rootProject.pomAttributes).artifactId = 'gobblin-rest-api'
+  // artifact names for 'data-model', 'avro-schema' and 'rest-model' may be added as well if needed
+}
+
 configure(install.repositories.mavenInstaller) {
   addFilter('gobblin-rest-api-rest-client') {artifact, file ->
     artifact.name == 'gobblin-rest-api-rest-client'
