@@ -74,6 +74,7 @@ configurations {
 //}
 artifacts {
   archives testJar
+  tests testJar
 }
 
 configure(install.repositories.mavenInstaller) {
@@ -85,13 +86,12 @@ configure(install.repositories.mavenInstaller) {
   }
 }
 
-
-configure(uploadArchives.repositories.mavenDeployer) {
-  addFilter(testJar.baseName) { artifact, file ->
-    artifact.name == testJar.baseName
-  }.project(rootProject.pomAttributes).artifactId = testJar.baseName
-  addFilter('') { artifact, file ->
-    artifact.name == jar.baseName
+if (rootProject.publishToMaven || rootProject.publishToNexus) {
+  configure(uploadArchives.repositories.mavenDeployer) {
+    addFilter(testJar.baseName) { artifact, file -> artifact.name == testJar.baseName
+    }.project(rootProject.pomAttributes).artifactId = testJar.baseName
+    addFilter('') { artifact, file -> artifact.name == jar.baseName
+    }
   }
 }
 

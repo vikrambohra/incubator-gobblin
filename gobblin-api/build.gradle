@@ -16,7 +16,6 @@
  */
 
 apply plugin: 'java'
-apply plugin: 'com.jfrog.bintray'
 
 dependencies {
     compile externalDependency.guava
@@ -55,25 +54,4 @@ test {
     }
 }
 
-//group='org.apache.gobblin'
-//
-//bintray {
-//    user = 'vikrambohra'
-//    key = '2d3ed691fa4cb37223e1254103b26755da937549'
-//    configurations = ['archives']
-//    override = true
-//    publish = false
-//    pkg {
-//        repo = 'test-repo'
-//        name = 'gobblin-github'
-//        userOrg = 'linkedin'
-//        licenses = ['Apache-2.0']
-//        vcsUrl = 'https://github.com/apache/incubator-gobblin.git'
-//        version {
-//            name = project.version
-//            desc = 'Gobblin test publish'
-//            released  = new Date()
-//        }
-//    }
-//}
 ext.classification="library"

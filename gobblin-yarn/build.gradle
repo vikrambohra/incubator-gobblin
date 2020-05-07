@@ -59,6 +59,7 @@ dependencies {
   compile externalDependency.helix
 
   testCompile project(path: ':gobblin-cluster', configuration: 'tests')
+  //testCompile project(":test-gobblin-cluster")
   testCompile project(":gobblin-example")
 
   testCompile externalDependency.testng

@@ -55,4 +55,4 @@ if [ -z "$GROUP" ]; then
 fi
 
 
-./gradlew install -Dorg.gradle.parallel=false -Dmaven.repo.local=$HOME/local-repo -Pversion=$VERSION -Pgroup=$GROUP
+./gradlew install -Dorg.gradle.parallel=false -Pversion=$VERSION -Pgroup=$GROUP
