@@ -136,19 +136,19 @@ subprojects {
     plugins.withType(JavaPlugin) {
         plugins.apply('maven')
 
-        install {
-            repositories {
-                mavenInstaller {
-                    mavenLocal()
-                    pom.project {
-                        packaging 'jar'
-                        name 'Apache Gobblin (incubating)'
-                        description 'A distributed data integration framework for streaming and batch data ecosystems.'
-                        url 'https://gobblin.apache.org/'
-                    }
-                }
-            }
-        }
+//        install {
+//            repositories {
+//                mavenInstaller {
+//                    mavenLocal()
+//                    pom.project {
+//                        packaging 'jar'
+//                        name 'Apache Gobblin (incubating)'
+//                        description 'A distributed data integration framework for streaming and batch data ecosystems.'
+//                        url 'https://gobblin.apache.org/'
+//                    }
+//                }
+//            }
+//        }
 
         // Publishing of maven artifacts for subprojects
         if (rootProject.ext.publishToNexus) {

@@ -152,28 +152,14 @@ allprojects {
   }
 }
 
-
-//apply plugin: 'java-library'
-//apply plugin: 'maven-publish'
-//subprojects {
-//  publishing {
-//    publications {
-//      maven(MavenPublication) {
-//        from components.java
-//        artifact sourcesJar
-//        artifact javadocJar
-//      }
-//    }
-//  }
-//}
-//
 subprojects {
   bintray {
     user = 'vikrambohra'
-    key = '2d3ed691fa4cb37223e1254103b26755da937549'
+    key = 'd83b3d3e270ccc6a4d9472b538738ce975af2a44'
     configurations = ['archives']
     override = true
     publish = true
+    dryRun = false
     pkg {
       repo = 'maven'
       name = 'gobblin-github'
@@ -182,30 +168,26 @@ subprojects {
       vcsUrl = 'https://github.com/apache/incubator-gobblin.git'
       version {
         name = project.version
-        desc = 'Gobblin first version'
+        //desc = 'Gobblin first version'
         released  = new Date()
+        // disable gpg signing to speed up publishing
+        gpg {
+          sign = false
+        }
+        // disable upload to maven central
+        mavenCentralSync {
+          sync = false
+        }
       }
     }
   }
 }
 
-//subprojects {
-//  plugins.withType(JavaPlugin) {
-//    plugins.apply('maven')
-//    // Publishing of maven artifacts for subproject
-//      uploadArchives {
-//        repositories {
-//          mavenDeployer {
-//            repository(url: "https://api.bintray.com/maven/linkedin/test-repo/gobblin-github/;publish=1") {
-//              authentication(userName: 'vikrambohra', password: '2d3ed691fa4cb37223e1254103b26755da937549')
-//            }
-//            //pom.project pomAttributes
-//          }
-//        }
-//      }
-//  }
-//}
-
+bintrayUpload {
+  doFirst {
+    println "Publishing $jar.baseName to Bintray (dryRun: $dryRun, repo: $repoName, publish: $publish)"
+  }
+}
 rat {
   excludes = [
     '**/.git/**',

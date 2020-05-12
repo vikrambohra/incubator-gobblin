@@ -47,6 +47,7 @@ done
 if [ -z "$VERSION" ]; then
   print_usage
   exit
+  #VERSION=project.ext.version
 fi
 echo VERSION=$VERSION
 
