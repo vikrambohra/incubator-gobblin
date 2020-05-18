@@ -112,6 +112,26 @@ artifacts {
     archives dataTemplateSourcesJar, dataTemplateJavadocJar, restClientSourcesJar, restClientJavadocJar
 }
 
+publishing {
+  publications {
+    dataTemplate(MavenPublication) {
+      from components.java
+      artifactId dataTemplateName
+      artifacts = [artifact(tasks.mainDataTemplateJar), dataTemplateSourcesJar, dataTemplateJavadocJar]
+      pom pomAttributes
+    }
+    restClient(MavenPublication) {
+      from components.java
+      artifactId restClientName
+      artifacts = [artifact(tasks.mainRestClientJar), restClientSourcesJar, restClientJavadocJar]
+      pom pomAttributes
+    }
+  }
+}
+project.ext.allPublications.add("dataTemplate")
+project.ext.allPublications.add("restClient")
+
+
 buildscript {
     repositories {
         mavenCentral()

@@ -50,7 +50,7 @@ dependencies {
   compile externalDependency.findBugsAnnotations
   compile externalDependency.helix
 
-  runtime project(":gobblin-modules:gobblin-service-kafka")
+  runtimeOnly project(":gobblin-modules:gobblin-service-kafka")
 
   testCompile project(":gobblin-example")
 
@@ -63,6 +63,7 @@ dependencies {
 task testJar(type: Jar, dependsOn: testClasses) {
   baseName = "test-${project.archivesBaseName}"
   from sourceSets.test.output
+  //classifier "test"
 }
 
 configurations {
@@ -71,6 +72,7 @@ configurations {
 
 artifacts {
   tests testJar
+  archives testJar
 }
 
 configurations {
@@ -81,6 +83,17 @@ configurations {
   testRuntime {
     resolutionStrategy {
       force 'com.google.inject:guice:3.0'
+    }
+  }
+}
+
+project.publishing {
+  publications {
+    testsPub(MavenPublication) {
+      from components.java //needed to get the dependencies mapped out
+      artifactId "test-${project.archivesBaseName}"
+      artifacts = [artifact(tasks.testJar)] //overwrites the default artifact
+      pom pomAttributes
     }
   }
 }

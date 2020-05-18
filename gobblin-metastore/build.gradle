@@ -37,7 +37,7 @@ dependencies {
     compile externalDependency.lombok
     compile externalDependency.reflections
 
-    runtime externalDependency.mysqlConnector
+    runtimeOnly externalDependency.mysqlConnector
 
     testCompile externalDependency.testng
     testCompile externalDependency.embeddedProcess
@@ -78,5 +78,16 @@ artifacts {
 test {
     workingDir rootProject.rootDir
 }
+
+//publishing {
+//    publications {
+//        tests(MavenPublication) {
+//            artifactId = project.name + "-test"
+//            artifact testJar
+//
+//            pom pomAttributes
+//        }
+//    }
+//}
 
 ext.classification="library"

@@ -134,6 +134,17 @@ test {
     maxParallelForks = 1
 }
 
+//Publication pub = publishing.publications.findByName("maven")
+//pub.pom.withXml {
+//  int i=0;
+//  def configs = ["gobblin-flow-config-service-api-rest-client", "gobblin-flow-config-service-api-data-template"]
+//  asNode().dependencies.'*'.each() {
+//    if( it.groupId.text() == project.group && it.artifactId.text() == 'gobblin-flow-config-service-api' ) {
+//      def aId = it.get("artifactId")[0]
+//      aId.setValue(configs[i++])
+//    }
+//  }
+//}
 clean {
   delete "../gobblin-test/locks"
   delete "../gobblin-test/basicTest"

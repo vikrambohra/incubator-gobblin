@@ -154,6 +154,18 @@ test {
     maxParallelForks = 1
 }
 
+//Publication pub = publishing.publications.findByName("maven")
+//pub.pom.withXml {
+//  int i=0;
+//  def configs = ["gobblin-rest-api-rest-client", "gobblin-rest-api-data-template"]
+//  asNode().dependencies.'*'.each() {
+//    if( it.groupId.text() == project.group && it.artifactId.text() == 'gobblin-rest-api' ) {
+//      def aId = it.get("artifactId")[0]
+//      aId.setValue(configs[i++])
+//    }
+//  }
+//}
+
 clean {
   delete "../gobblin-test/locks"
   delete "../gobblin-test/basicTest"
