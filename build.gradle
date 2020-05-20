@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-
+println "Dummy change to the build script"
 apply from: 'gradle/scripts/environment.gradle'
 
 buildscript {
