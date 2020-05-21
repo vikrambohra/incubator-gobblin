@@ -30,10 +30,6 @@ import org.gradle.api.internal.java.JavaLibrary
 //  }
 //}
 
-allprojects {
-  ext.allPublications = []
-}
-
 ext.pomAttributes = {
   packaging = 'jar'
   // optionally artifactId can be defined here
@@ -63,6 +59,22 @@ ext.pomAttributes = {
 }
 
 subprojects {
+  ext.addPublicationToBintray = { pubName ->
+    def newC = project.bintray.publications.collect()
+    newC.add(pubName)
+    project.bintray.publications = newC
+  }
+
+  task printPubs {
+    doLast {
+      println "Bintray Publications in $project.name are "
+      println project.bintray.publications.collect()
+    }
+  }
+}
+
+
+subprojects {
   plugins.withType(JavaPlugin) {
     plugins.apply('maven-publish')
     publishing {
@@ -76,19 +88,16 @@ subprojects {
         }
       }
     }
-    ext.allPublications.add("maven")
   }
 
   plugins.apply('com.jfrog.bintray')
   bintray {
-    user = 'vikrambohra'
-    key = 'd83b3d3e270ccc6a4d9472b538738ce975af2a44'
-    //configurations = ['bintrayPublishing']
-    //configurations = ['archives']
-    publications = ["maven","dataTemplate","restClient","testsPub"] //ext.allPublications
-    override = true
-    publish = true
-    dryRun = false
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ["mavenJava"]
+    override = false
+    publish = false
+    dryRun = true
     pkg {
       repo = 'maven'
       name = 'gobblin-github'
@@ -110,10 +119,12 @@ subprojects {
       }
     }
   }
+
+  tasks.bintrayUpload {
+    dependsOn(tasks.printPubs)
+
+    doFirst {
+      println "Running bintrayUplaod task... "
+    }
+  }
 }
-
-
-
-
-
-

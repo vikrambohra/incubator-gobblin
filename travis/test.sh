@@ -25,7 +25,7 @@ set -e
 
 #free
 
-RUN_TEST_GROUP=${RUN_TEST_GROUP:-default}
+RUN_TEST_GROUP="build" #${RUN_TEST_GROUP:-default}
 
 script_dir=$(dirname $0)
 echo "Old GRADLE_OPTS=$GRADLE_OPTS"
