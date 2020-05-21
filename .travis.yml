@@ -43,9 +43,9 @@ deploy:
 
 env:
   - RUN_TEST_GROUP=build
-  - RUN_TEST_GROUP=default
-  - RUN_TEST_GROUP=group1
-  - RUN_TEST_GROUP=coverage
+#  - RUN_TEST_GROUP=default
+#  - RUN_TEST_GROUP=group1
+#  - RUN_TEST_GROUP=coverage
 
 jdk:
   - oraclejdk8
