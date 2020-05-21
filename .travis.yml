@@ -35,11 +35,8 @@ script:
 
 after_success:
   - bash <(cat .codecov_bash)
-after_failure: ./travis/junit-errors-to-stdout.sh
-
-deploy:
-  - skip_cleanup: true
   - ./gradlew bintrayUpload -i
+after_failure: ./travis/junit-errors-to-stdout.sh
 
 env:
   - RUN_TEST_GROUP=build
