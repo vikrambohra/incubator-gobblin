@@ -9,7 +9,7 @@ BUILD_VERSION=$PROJECT_VERSION-dev-${TRAVIS_BUILD_NUMBER}
 echo "Build Version: $BUILD_VERSION"
 
 echo "Testing Bintray publication by uploading in dry run mode"
-./gradlew bintrayUpload -Pversion=$BUILD_VERSION
+./gradlew -i -s bintrayUpload -Pversion=$BUILD_VERSION
 
 echo "Is this a travis pull request build and on which branch??? "
 echo "Pull request: [$TRAVIS_PULL_REQUEST], Travis branch: [$TRAVIS_BRANCH]"
