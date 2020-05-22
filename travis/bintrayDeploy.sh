@@ -30,7 +30,6 @@ then
     echo "Branch master and PR true"
 fi
 
-
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
     echo "Branch master and PR false"
