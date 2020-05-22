@@ -8,11 +8,8 @@ echo "Project Version: $PROJECT_VERSION"
 BUILD_VERSION=$PROJECT_VERSION-dev-${TRAVIS_BUILD_NUMBER}
 echo "Build Version: $BUILD_VERSION"
 
-#echo "Building and testing artifacts, and creating pom files"
-#./gradlew -s --scan -i publishToMavenLocal -Pversion=$BUILD_VERSION
-
 echo "Testing Bintray publication by uploading in dry run mode"
-./gradlew -s -i bintrayUpload -Pversion=$BUILD_VERSION
+./gradlew bintrayUpload -Pversion=$BUILD_VERSION
 
 echo "Pull request: [$TRAVIS_PULL_REQUEST], Travis branch: [$TRAVIS_BRANCH]"
 # release only from master when no pull request build
