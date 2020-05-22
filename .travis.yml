@@ -30,13 +30,12 @@ before_script:
   - mysql -uroot -e "create user testUser identified by 'testPassword';"
 
 script:
-#  - ./travis/bintrayDeploy.sh
   - ./travis/test.sh
 #  - ./gradlew jacocoTestReport
 
 after_success:
   - bash <(cat .codecov_bash)
- # - ./gradlew bintrayUpload -i
+  - ./travis/bintrayDeploy.sh
 after_failure: ./travis/junit-errors-to-stdout.sh
 
 env:
@@ -48,10 +47,10 @@ env:
 jdk:
   - oraclejdk8
 
-deploy:
-  - provider: script
-    script: ./travis/bintrayDeploy.sh
-    cleanup: true
+#deploy:
+#  - provider: script
+#    script: ./travis/bintrayDeploy.sh
+#    cleanup: true
 
 matrix:
   exclude:
