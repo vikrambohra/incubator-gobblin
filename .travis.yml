@@ -30,12 +30,13 @@ before_script:
   - mysql -uroot -e "create user testUser identified by 'testPassword';"
 
 script:
-  - ./travis/test.sh
+  - ./travis/bintrayDeploy.sh
+#  - ./travis/test.sh
 #  - ./gradlew jacocoTestReport
 
 after_success:
   - bash <(cat .codecov_bash)
-  - ./gradlew bintrayUpload -i
+ # - ./gradlew bintrayUpload -i
 after_failure: ./travis/junit-errors-to-stdout.sh
 
 env:

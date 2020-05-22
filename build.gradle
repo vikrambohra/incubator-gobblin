@@ -137,6 +137,7 @@ apply from: 'gradle/scripts/javaVersionCheck.gradle'
 
 apply from: 'gradle/scripts/rat.gradle'
 apply from: 'gradle/scripts/release.gradle'
+apply from: 'adhoc.gradle'
 
 task wrapper(type: Wrapper) { gradleVersion = '2.13' }
 
@@ -150,6 +151,12 @@ allprojects {
     doFirst {
       it.codegenClasspath += files("${System.getProperty('java.home')}/../lib/tools.jar")
     }
+  }
+}
+
+task printVersionName {
+  doLast {
+    println project.version
   }
 }
 
