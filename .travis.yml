@@ -48,5 +48,10 @@ env:
 jdk:
   - oraclejdk8
 
+deploy:
+  - provider: script
+    script: ./travis/bintrayDeploy.sh
+    skip_cleanup: true
+
 matrix:
   exclude:
