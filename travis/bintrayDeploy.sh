@@ -30,7 +30,9 @@ then
     echo "Branch master and PR true"
 fi
 
+# release only from master when no pull request build
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
-    echo "Branch master and PR false"
+    echo "Uploading artifacts to bintray for version $BUILD_VERSION"
+    ./gradlew -i bintrayUpload -Pversion=$BUILD_VERSION
 fi
