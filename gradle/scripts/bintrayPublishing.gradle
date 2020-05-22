@@ -63,7 +63,7 @@ subprojects{
     publish = true
     dryRun = project.hasProperty("bintray.dryRun")
     pkg {
-      repo = 'test-repo'
+      repo = 'maven'
       name = 'gobblin-github'
       userOrg = 'linkedin'
       licenses = ['Apache-2.0']
@@ -84,16 +84,7 @@ subprojects{
     }
   }
 
-  task printPubs {
-    doLast {
-      println "Bintray Publications in $project.name are "
-      println project.bintray.publications.collect()
-    }
-  }
-
   tasks.bintrayUpload {
-    dependsOn(project.tasks.printPubs)
-
     doFirst {
       println "Running bintrayUpload for $project.name "
     }
@@ -103,10 +94,6 @@ subprojects{
     def newC = project.bintray.publications.collect()
     newC.add(pubName)
     project.bintray.publications = newC
-  }
-
-  task buildSnapshot {
-
   }
 }
 
