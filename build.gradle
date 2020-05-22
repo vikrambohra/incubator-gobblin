@@ -137,7 +137,6 @@ apply from: 'gradle/scripts/javaVersionCheck.gradle'
 
 apply from: 'gradle/scripts/rat.gradle'
 apply from: 'gradle/scripts/release.gradle'
-apply from: 'adhoc.gradle'
 
 task wrapper(type: Wrapper) { gradleVersion = '2.13' }
 
