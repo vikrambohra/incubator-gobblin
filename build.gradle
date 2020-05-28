@@ -159,6 +159,8 @@ task printVersionName {
   }
 }
 
+println "dummy change"
+
 rat {
   excludes = [
     '**/.git/**',
