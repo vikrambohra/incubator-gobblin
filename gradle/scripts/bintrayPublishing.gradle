@@ -90,9 +90,7 @@ subprojects{
   }
 
   ext.addPublicationToBintray = { pubName ->
-    def newC = project.bintray.publications.collect()
-    newC.add(pubName)
-    project.bintray.publications = newC
+    project.bintray.publications += pubName
   }
 
   ext.addRuntimeDependenciesToPom = {

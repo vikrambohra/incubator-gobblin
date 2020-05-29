@@ -63,6 +63,10 @@ shadowJar {
   relocate 'com.google', 'shadow.gobblin.orc.com.google'
 }
 
+jar {
+  classifier "thin"
+}
+
 publishing {
   publications {
     shadowPub(MavenPublication) {
@@ -72,6 +76,6 @@ publishing {
     }
   }
 }
-addPublicationToBintray("shadowPub")
+project.bintray.publications = ["shadowPub"]
 
 ext.classification="library"

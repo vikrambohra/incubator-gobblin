@@ -31,6 +31,7 @@ BUILD_VERSION=$PROJECT_VERSION-dev-${TRAVIS_BUILD_NUMBER}
 echo "Build Version: $BUILD_VERSION"
 
 echo "Pull request: [$TRAVIS_PULL_REQUEST], Travis branch: [$TRAVIS_BRANCH]"
+echo " ENV Variable: Bintray username  [$BINTRAY_USER]"
 # release only from master when no pull request build
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
